@@ -1,10 +1,10 @@
 package com.mercury.boot.dao;
 
-import com.mercury.boot.bean.User;
+import com.mercury.boot.bean.Customers;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface UserDao extends JpaRepository<User,Long> {
+public interface UserDao extends JpaRepository<Customers,Long> {
 
-    User findByUsername(String username);
+    Customers findByUsername(String username);
 }

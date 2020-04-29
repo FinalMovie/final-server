@@ -2,14 +2,12 @@ package com.mercury.boot.bean;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name="CUSTOMERS")
-public class User implements UserDetails {
+public class Customers implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
@@ -23,10 +21,10 @@ public class User implements UserDetails {
     @Column
     private String email;
 
-    public User() {
+    public Customers() {
     }
 
-    public User(long id, String username, String password,String email) {
+    public Customers(long id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;

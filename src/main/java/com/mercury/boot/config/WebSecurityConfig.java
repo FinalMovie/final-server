@@ -2,7 +2,6 @@ package com.mercury.boot.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mercury.boot.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,10 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     final CustomPasswordEncoder customPasswordEncoder;
     final UserService userService;
 
-    public WebSecurityConfig(
-
-            CustomPasswordEncoder customPasswordEncoder,
-            UserService userService) {
+    public WebSecurityConfig(CustomPasswordEncoder customPasswordEncoder, UserService userService) {
         this.customPasswordEncoder = customPasswordEncoder;
         this.userService = userService;
     }
