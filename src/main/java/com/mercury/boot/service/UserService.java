@@ -48,7 +48,6 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //在这里可以自己调用数据库，对username进行查询，看看在数据库中是否存在
         Customers user = new Customers();
-        System.out.println(username);
         // 管理员判断
         if (username.equals("admin")) {
             user.setUsername(username);
