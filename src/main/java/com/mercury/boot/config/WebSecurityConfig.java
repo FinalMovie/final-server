@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     JSONObject res = new JSONObject();
                     res.put("success", false);
                     res.put("msg", "need login");
-                    response.setStatus(403);
+                    response.setStatus(200);
                     response.setContentType("application/json;charset=UTF-8");
                     response.getWriter().append(res.toString());
                 })
@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     JSONObject res = new JSONObject();
                     res.put("success", false);
                     res.put("msg", "Fail to login, Please check your username or password");
-                    response.setStatus(500);
+                    response.setStatus(200);
                     response.setContentType("application/json;charset=UTF-8");
                     response.getWriter().append(res.toString());
                 })

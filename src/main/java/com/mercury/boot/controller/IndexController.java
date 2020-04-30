@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @EnableAutoConfiguration
 public class IndexController {
-    @RequestMapping("/")
+    @RequestMapping("/api/index")
     public String index() {
         return "Index Page.";
     }
-
 }
