@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name="CUSTOMERS")
 public class Customers implements UserDetails {
 
     @Id
