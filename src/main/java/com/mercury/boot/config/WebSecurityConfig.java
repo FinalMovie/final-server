@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .formLogin()
-                .loginProcessingUrl("/api/login")  // 自定义的登录接口
+                .loginProcessingUrl("/api/login")
                 .permitAll()
                 .failureHandler((request, response, ex) -> {
                     JSONObject res = new JSONObject();
@@ -107,7 +107,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().disable();
         http.csrf().disable();
-        //解决中文乱码问题
+
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
@@ -117,7 +117,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        //对默认的UserDetailsService进行覆盖
+
         authenticationProvider.setUserDetailsService(userService);
         authenticationProvider.setPasswordEncoder(customPasswordEncoder);
         return authenticationProvider;
