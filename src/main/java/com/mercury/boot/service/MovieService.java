@@ -21,4 +21,8 @@ public class MovieService {
         return movieDao.findAll();
     }
 
+    public Movies getMovieById(long id) {
+        return movieDao.getOne(id);
+    }
+
 }
