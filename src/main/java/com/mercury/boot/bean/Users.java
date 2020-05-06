@@ -11,8 +11,6 @@ import java.util.Collection;
 public class Users implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-    @SequenceGenerator(name = "SEQ", sequenceName = "MSI_USER_SEQ", allocationSize = 1)
     private long id;
 
     @Column

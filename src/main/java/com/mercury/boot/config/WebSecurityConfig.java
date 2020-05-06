@@ -37,9 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/static/**");
 
         // 不拦截的API
-        web.ignoring().antMatchers("/api/login/*");
-        web.ignoring().antMatchers("/api/logout/*");
-        web.ignoring().antMatchers("/api/register/*");
+        web.ignoring().antMatchers("/api/login*");
+        web.ignoring().antMatchers("/api/logout*");
+        web.ignoring().antMatchers("/api/register*");
     }
 
     @Override

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Component
 @Service
@@ -26,6 +27,21 @@ public class UserService implements UserDetailsService {
 
     public List<Users> getAllUsers() {
         return userDao.findAll();
+    }
+
+    public boolean saveUser(Users user) {
+        try {
+            user.setId(System.currentTimeMillis());
+            userDao.save(user);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean userExist(Users user) {
+        Users result = userDao.findByUsername(user.getUsername());
+        return result != null;
     }
 
     @Override
