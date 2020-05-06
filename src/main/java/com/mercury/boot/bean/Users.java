@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name="CUSTOMERS")
-public class Customers implements UserDetails {
+@Table(name = "USERS")
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
@@ -21,15 +21,18 @@ public class Customers implements UserDetails {
     private String password;
     @Column
     private String email;
+    @Column
+    private int role;
 
-    public Customers() {
+    public Users() {
     }
 
-    public Customers(long id, String username, String password, String email) {
+    public Users(long id, String username, String password, String email, int role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.role = role;
     }
 
     public void setUsername(String username) {
@@ -69,6 +72,14 @@ public class Customers implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     @Override

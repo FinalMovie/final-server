@@ -1,6 +1,6 @@
 package com.mercury.boot.service;
 
-import com.mercury.boot.bean.Customers;
+import com.mercury.boot.bean.Users;
 import com.mercury.boot.config.CustomPasswordEncoder;
 import com.mercury.boot.dao.UserDao;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,42 +24,23 @@ public class UserService implements UserDetailsService {
         this.customPasswordEncoder = customPasswordEncoder;
     }
 
-    public List<Customers> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userDao.findAll();
     }
-
-//    public boolean addOneUser(Customers user) {
-//        try {
-//            Customers existing = userDao.findByUsername(user.getUsername());
-//            if (existing == null) {
-//                user.setPassword(customPasswordEncoder.encode(user.getPassword()));
-//                userDao.save(user);
-//                return true;
-//            } else {
-//                return false;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Customers user = new Customers();
-        if (username.equals("admin")) {
-            user.setUsername(username);
-            user.setPassword("admin");
+        Users user = new Users();
+
+        user.setUsername(username);
+        Users result = userDao.findByUsername(username);
+        if (result == null) {
+            throw new UsernameNotFoundException("no user named " + username);
         } else {
-            user.setUsername(username);
-            Customers result = userDao.findByUsername(username);
-            if (result == null) {
-                throw new UsernameNotFoundException("no user named " + username);
-            } else {
-                user.setPassword(result.getPassword());
-            }
+            user.setPassword(result.getPassword());
         }
+
         return user;
     }
 
