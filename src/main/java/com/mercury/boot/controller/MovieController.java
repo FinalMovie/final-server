@@ -85,7 +85,7 @@ public class MovieController {
         String desc = request.getParameter("desc");
         String image = request.getParameter("image");
         Movies movie = new Movies(Long.parseLong(movieId), name, Integer.parseInt(price), desc, image);
-        movieService.saveMovie(movie);
+        movie = movieService.saveMovie(movie);
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         map.put("data", movie);
@@ -101,7 +101,7 @@ public class MovieController {
         String desc = request.getParameter("desc");
         String image = request.getParameter("image");
         Movies movie = new Movies(movieId, name, Integer.parseInt(price), desc, image);
-        movieService.saveMovie(movie);
+        movie = movieService.saveMovie(movie);
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         map.put("data", movie);

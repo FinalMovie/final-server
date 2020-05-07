@@ -48,7 +48,7 @@ public class FoodController {
         String calories = request.getParameter("calories");
         String image = request.getParameter("image");
         Food food = new Food(Long.parseLong(foodId), name, Integer.parseInt(price), Integer.parseInt(calories), image);
-        foodService.saveFood(food);
+        food = foodService.saveFood(food);
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         map.put("data", food);
@@ -64,7 +64,7 @@ public class FoodController {
         String calories = request.getParameter("calories");
         String image = request.getParameter("image");
         Food food = new Food(foodId, name, Integer.parseInt(price), Integer.parseInt(calories), image);
-        foodService.saveFood(food);
+        food = foodService.saveFood(food);
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         map.put("data", food);
