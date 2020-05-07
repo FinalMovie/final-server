@@ -2,7 +2,6 @@ package com.mercury.boot.service;
 
 
 import com.mercury.boot.bean.Food;
-import com.mercury.boot.bean.Movies;
 import com.mercury.boot.dao.FoodDao;
 import org.springframework.stereotype.Component;
 
@@ -19,5 +18,13 @@ public class FoodService {
 
     public List<Food> getAllFood() {
         return foodDao.findAll();
+    }
+
+    public void deleteFood(long id) {
+        foodDao.deleteById(id);
+    }
+
+    public Food saveFood(Food food) {
+        return foodDao.save(food);
     }
 }

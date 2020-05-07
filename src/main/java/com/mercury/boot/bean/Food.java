@@ -1,10 +1,13 @@
 package com.mercury.boot.bean;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="FOOD")
+@Table(name = "FOOD")
 public class Food {
 
     @Id
@@ -18,10 +21,19 @@ public class Food {
     private int price;
     @Column
     private int calories;
+
     @Column
     private String image;
 
     public Food() {
+    }
+
+    public Food(long id, String name, int price, int calories, String image) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.calories = calories;
+        this.image = image;
     }
 
     public long getId() {

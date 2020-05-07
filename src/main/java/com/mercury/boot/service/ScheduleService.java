@@ -18,7 +18,7 @@ public class ScheduleService {
         this.scheduleDao = scheduleDao;
     }
 
-    public List<Schedule> getScheduleByMovieId(int movieId) {
+    public List<Schedule> getScheduleByMovieId(long movieId) {
         return scheduleDao.findAllByMovieId(movieId);
     }
 

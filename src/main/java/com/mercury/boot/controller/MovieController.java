@@ -1,6 +1,7 @@
 package com.mercury.boot.controller;
 
 
+import com.mercury.boot.bean.Movies;
 import com.mercury.boot.bean.Schedule;
 import com.mercury.boot.service.MovieService;
 import com.mercury.boot.service.RoomService;
@@ -45,12 +46,12 @@ public class MovieController {
         List<Object> result = new LinkedList<>();
         try {
             String movieId = request.getParameter("id");
-            List<Schedule> schedules = scheduleService.getScheduleByMovieId(Integer.parseInt(movieId));
+            List<Schedule> schedules = scheduleService.getScheduleByMovieId(Long.parseLong(movieId));
             for (Schedule s :
                     schedules) {
                 Map<String, Object> m = Utils.beanToMap(s);
-                m.put("movie", Utils.beanToMap(movieService.getMovieById(Integer.parseInt(map.get("movieId").toString()))));
-                m.put("room", Utils.beanToMap(movieService.getMovieById(Integer.parseInt(map.get("roomId").toString()))));
+                m.put("movie", Utils.beanToMap(movieService.getMovieById(Long.parseLong(m.get("movieId").toString()))));
+                m.put("room", Utils.beanToMap(roomService.getRoomById(Long.parseLong(m.get("roomId").toString()))));
                 m.remove("movieId");
                 m.remove("roomId");
                 result.add(m);
@@ -62,6 +63,48 @@ public class MovieController {
         }
         map.put("success", true);
         map.put("data", result);
+        return map;
+    }
+
+    @RequestMapping("/api/deleteMovie")
+    @ResponseBody
+    public Map<String, Object> deleteMovie(HttpServletRequest request) {
+        String movieId = request.getParameter("id");
+        movieService.deleteMovie(Long.parseLong(movieId));
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        return map;
+    }
+
+    @RequestMapping("/api/editMovie")
+    @ResponseBody
+    public Map<String, Object> editMovie(HttpServletRequest request) {
+        String movieId = request.getParameter("id");
+        String name = request.getParameter("name");
+        String price = request.getParameter("price");
+        String desc = request.getParameter("desc");
+        String image = request.getParameter("image");
+        Movies movie = new Movies(Long.parseLong(movieId), name, Integer.parseInt(price), desc, image);
+        movieService.saveMovie(movie);
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("data", movie);
+        return map;
+    }
+
+    @RequestMapping("/api/addMovie")
+    @ResponseBody
+    public Map<String, Object> addMovie(HttpServletRequest request) {
+        long movieId = System.currentTimeMillis();
+        String name = request.getParameter("name");
+        String price = request.getParameter("price");
+        String desc = request.getParameter("desc");
+        String image = request.getParameter("image");
+        Movies movie = new Movies(movieId, name, Integer.parseInt(price), desc, image);
+        movieService.saveMovie(movie);
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("data", movie);
         return map;
     }
 }
