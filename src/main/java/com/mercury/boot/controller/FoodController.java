@@ -58,7 +58,7 @@ public class FoodController {
     @RequestMapping("/api/addFood")
     @ResponseBody
     public Map<String, Object> addFood(HttpServletRequest request) {
-        long foodId = System.currentTimeMillis();
+        long foodId = foodService.getAllFood().size() + 1;
         String name = request.getParameter("name");
         String price = request.getParameter("price");
         String calories = request.getParameter("calories");

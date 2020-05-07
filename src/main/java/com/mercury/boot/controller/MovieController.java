@@ -82,7 +82,7 @@ public class MovieController {
         String movieId = request.getParameter("id");
         String name = request.getParameter("name");
         String price = request.getParameter("price");
-        String desc = request.getParameter("desc");
+        String desc = request.getParameter("description");
         String image = request.getParameter("image");
         Movies movie = new Movies(Long.parseLong(movieId), name, Integer.parseInt(price), desc, image);
         movie = movieService.saveMovie(movie);
@@ -95,10 +95,10 @@ public class MovieController {
     @RequestMapping("/api/addMovie")
     @ResponseBody
     public Map<String, Object> addMovie(HttpServletRequest request) {
-        long movieId = System.currentTimeMillis();
+        long movieId = movieService.getAllMovies().size() + 1;
         String name = request.getParameter("name");
         String price = request.getParameter("price");
-        String desc = request.getParameter("desc");
+        String desc = request.getParameter("description");
         String image = request.getParameter("image");
         Movies movie = new Movies(movieId, name, Integer.parseInt(price), desc, image);
         movie = movieService.saveMovie(movie);

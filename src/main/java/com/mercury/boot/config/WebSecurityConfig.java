@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        // 不拦截静态资源
+
         web.ignoring().antMatchers("/css/**");
         web.ignoring().antMatchers("/js/**");
         web.ignoring().antMatchers("/images/**");
@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/lang/**");
         web.ignoring().antMatchers("/static/**");
 
-        // 不拦截的API
+
 //        web.ignoring().antMatchers("/api/login");
 //        web.ignoring().antMatchers("/api/login/*");
 //        web.ignoring().antMatchers("/api/logout/*");
@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authenticationProvider(authenticationProvider())
 
-                //定义哪些url需要保护，哪些url不需要保护
+
                 .authorizeRequests().anyRequest().authenticated()
 
                 .and()
@@ -103,7 +103,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .permitAll()
 
-                // 自动登录
+
                 .and()
                 .rememberMe();
 

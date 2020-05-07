@@ -18,7 +18,7 @@ public class Food {
     @Column
     private String name;
     @Column
-    private int price;
+    private double price;
     @Column
     private int calories;
 
@@ -52,7 +52,7 @@ public class Food {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

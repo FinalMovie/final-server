@@ -21,6 +21,10 @@ public class Users implements UserDetails {
     private String email;
     @Column
     private int role;
+    @Column
+    private int membership;
+
+
 
     public Users() {
     }
@@ -78,6 +82,14 @@ public class Users implements UserDetails {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public int getMembership() {
+        return membership;
+    }
+
+    public void setMembership(int membership) {
+        this.membership = membership;
     }
 
     @Override

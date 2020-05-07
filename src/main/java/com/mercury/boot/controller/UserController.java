@@ -50,7 +50,8 @@ public class UserController {
         u.setUsername(username);
         u.setPassword(password);
         u.setEmail(email);
-        u.setRole(0);
+        u.setRole(1);
+        u.setMembership(0);
         Map<String, Object> map = new HashMap<>();
         if (userService.userExist(u)) {
             map.put("success", false);
