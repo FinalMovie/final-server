@@ -39,25 +39,29 @@ public class MovieController {
     }
 
     @RequestMapping("/api/movieSchedule")
-//    @ResponseBody
+    @ResponseBody
     public Map<String, Object> movieSchedule(HttpServletRequest request) {
-        String movieId = request.getParameter("id");
-        List<Schedule> schedules = scheduleService.getScheduleByMovieId(Integer.parseInt(movieId));
-        List<Object> result = new LinkedList<>();
-        for (Schedule s :
-                schedules) {
-            Map<String, Object> map = Utils.beanToMap(s);
-
-            map.put("movie", Utils.beanToMap(movieService.getMovieById(Integer.parseInt(map.get("movieId").toString()))));
-            map.put("room", Utils.beanToMap(movieService.getMovieById(Integer.parseInt(map.get("roomId").toString()))));
-            map.remove("movieId");
-            map.remove("roomId");
-            result.add(map);
-        }
         Map<String, Object> map = new HashMap<>();
+        List<Object> result = new LinkedList<>();
+        try {
+            String movieId = request.getParameter("id");
+            List<Schedule> schedules = scheduleService.getScheduleByMovieId(Integer.parseInt(movieId));
+            for (Schedule s :
+                    schedules) {
+                Map<String, Object> m = Utils.beanToMap(s);
+                m.put("movie", Utils.beanToMap(movieService.getMovieById(Integer.parseInt(map.get("movieId").toString()))));
+                m.put("room", Utils.beanToMap(movieService.getMovieById(Integer.parseInt(map.get("roomId").toString()))));
+                m.remove("movieId");
+                m.remove("roomId");
+                result.add(m);
+            }
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("msg", e.toString());
+            return map;
+        }
         map.put("success", true);
         map.put("data", result);
         return map;
     }
-
 }
