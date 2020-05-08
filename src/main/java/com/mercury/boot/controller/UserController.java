@@ -29,6 +29,13 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @RequestMapping("/api/userByEmail")
+    @ResponseBody
+    public Users userByEmail(HttpServletRequest request) {
+        String email = request.getParameter("email");
+        return userService.findUserByEmail(email);
+    }
+
     @RequestMapping("/api/currentUser")
     @ResponseBody
     public UserDetails currentUser() {
@@ -50,7 +57,7 @@ public class UserController {
         u.setUsername(username);
         u.setPassword(password);
         u.setEmail(email);
-        u.setRole(1);
+        u.setRole("user");
         u.setMembership(0);
         Map<String, Object> map = new HashMap<>();
         if (userService.userExist(u)) {

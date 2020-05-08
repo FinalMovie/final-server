@@ -38,6 +38,10 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
+    public Users findUserByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
     public boolean userExist(Users user) {
         Users result = userDao.findByUsername(user.getUsername());
         return result != null;

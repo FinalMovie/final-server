@@ -21,7 +21,7 @@ public class Schedule {
     private long roomId;
 
     @Column
-    private Date startTime;
+    private String startTime;
 
     @Column
     private int lastTime;
@@ -50,11 +50,11 @@ public class Schedule {
         this.roomId = roomId;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 

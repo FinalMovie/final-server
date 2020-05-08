@@ -20,21 +20,13 @@ public class Users implements UserDetails {
     @Column
     private String email;
     @Column
-    private int role;
+    private String role;
     @Column
-    private int membership;
+    private int membershipScore;
 
 
 
     public Users() {
-    }
-
-    public Users(long id, String username, String password, String email, int role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = role;
     }
 
     public void setUsername(String username) {
@@ -76,20 +68,20 @@ public class Users implements UserDetails {
         this.email = email;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
     public int getMembership() {
-        return membership;
+        return membershipScore;
     }
 
     public void setMembership(int membership) {
-        this.membership = membership;
+        this.membershipScore = membership;
     }
 
     @Override
