@@ -41,7 +41,8 @@ public class UserController {
     public UserDetails currentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
-            return (UserDetails) principal;
+            return userService.findUserByUserName(((UserDetails) principal).getUsername());
+//            return (UserDetails) principal;
         } else {
             return null;
         }
