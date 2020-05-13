@@ -32,10 +32,12 @@ public class MovieController {
 
     @RequestMapping("/api/movieList")
     @ResponseBody
-    public Map<String, Object> moviesList() {
+    public Map<String, Object> moviesList(HttpServletRequest request) {
+        int size = request.getParameter("size") == null ? 10 : Integer.parseInt(request.getParameter("size"));
+        int page = request.getParameter("page") == null ? 0 : Integer.parseInt(request.getParameter("page"));
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
-        map.put("data", movieService.getAllMovies());
+        map.put("data", movieService.getAllMoviesPageable(page, size));
         return map;
     }
 

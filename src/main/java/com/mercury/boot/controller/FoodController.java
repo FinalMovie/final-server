@@ -22,10 +22,12 @@ public class FoodController {
 
     @RequestMapping("/api/foodList")
     @ResponseBody
-    public Map<String, Object> foodList() {
+    public Map<String, Object> foodList(HttpServletRequest request) {
+        int size = request.getParameter("size") == null ? 10 : Integer.parseInt(request.getParameter("size"));
+        int page = request.getParameter("page") == null ? 0 : Integer.parseInt(request.getParameter("page"));
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
-        map.put("data", foodService.getAllFood());
+        map.put("data", foodService.getAllFoodPageable(page, size));
         return map;
     }
 
