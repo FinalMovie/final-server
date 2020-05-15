@@ -41,6 +41,8 @@ public class MovieController {
         return map;
     }
 
+
+
     @RequestMapping("/api/movieSchedule")
     @ResponseBody
     public Map<String, Object> movieSchedule(HttpServletRequest request) {

@@ -38,6 +38,10 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
+    public Users updateUser(Users user) {
+        return userDao.save(user);
+    }
+
     public Users findUserByEmail(String email) {
         return userDao.findByEmail(email);
     }

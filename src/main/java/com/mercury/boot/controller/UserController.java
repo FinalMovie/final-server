@@ -36,6 +36,39 @@ public class UserController {
         return userService.findUserByEmail(email);
     }
 
+    @RequestMapping("/api/pay")
+    @ResponseBody
+    public Map<String, Object> pay(HttpServletRequest request) {
+        double amount = Double.parseDouble(request.getParameter("amount"));
+        Map<String, Object> map = new HashMap<>();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Users user = userService.findUserByUserName(((UserDetails) principal).getUsername());
+        user.setMembership(user.getMembership() + (int) amount);
+        userService.updateUser(user);
+        map.put("success", true);
+        return map;
+    }
+
+    @RequestMapping("/api/changePwd")
+    @ResponseBody
+    public Map<String, Object> changePwd(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        String password = request.getParameter("password");
+        String newPassword = request.getParameter("new_password");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Users user = userService.findUserByUserName(((UserDetails) principal).getUsername());
+        if (user.getPassword().equals(password)) {
+            user.setPassword(newPassword);
+            userService.updateUser(user);
+            map.put("success", true);
+            map.put("msg", "ok");
+        } else {
+            map.put("success", false);
+            map.put("msg", "wrong password");
+        }
+        return map;
+    }
+
     @RequestMapping("/api/currentUser")
     @ResponseBody
     public UserDetails currentUser() {
