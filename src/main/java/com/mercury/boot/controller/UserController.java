@@ -1,7 +1,9 @@
 package com.mercury.boot.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.mercury.boot.bean.Users;
+import com.mercury.boot.service.MailService;
 import com.mercury.boot.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,9 +21,11 @@ import java.util.Map;
 public class UserController {
 
     final UserService userService;
+    final MailService mailService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, MailService mailService) {
         this.userService = userService;
+        this.mailService = mailService;
     }
 
     @GetMapping
@@ -34,6 +38,34 @@ public class UserController {
     public Users userByEmail(HttpServletRequest request) {
         String email = request.getParameter("email");
         return userService.findUserByEmail(email);
+    }
+
+    @RequestMapping("/api/sendEmail")
+    @ResponseBody
+    public Map<String, Object> sendEmail(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            String email = request.getParameter("email");
+            List cart = JSON.parseArray(request.getParameter("cart"));
+            StringBuilder content = new StringBuilder("You have ordered: \n");
+            for (Object c : cart
+            ) {
+                c = (Map) c;
+                if (((Map) c).get("type").equals("movie")) {
+                    String str = ((Map) c).get("name") + " $ " + ((Map) c).get("price");
+                    content.append(str).append("\n");
+                } else {
+                    String str = ((Map) c).get("name") + " $ " + ((Map) c).get("price");
+                    content.append(str).append("\n");
+                }
+            }
+            mailService.sendSimpleMail(email, "[No-Reply] Order Receipt", content.toString());
+            map.put("success", true);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("msg", e.toString());
+        }
+        return map;
     }
 
     @RequestMapping("/api/pay")
